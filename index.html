@@ -1,25 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ai Chatbot</title>
-  <link rel="stylesheet" href="style.css" >
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Weather App</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+
 <body>
-  <div class="chat-container">
-    <header>
-      <h1>AI Chatbot 🤖</h1>
-    </header>
-    <div id="chat-box" class="chat-box">
-         <div class="message user-message">Hi</div>
-         <div class="message bot-message">Hi</div>
+
+  
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Weather App</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About this App</a></li>
+        </ul>
+
+        
+        <form class="d-flex" id="weatherForm">
+          <input id="city" class="form-control me-2" type="search" placeholder="Search city" />
+          
+          <button id="submit" type="submit" class="btn btn-outline-success">
+            Search
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="input-area">
-      <input type="text" id="user-input" placeholder="Type your message..."/>
-      <button id="send-btn">Send</button>
+  </nav>
+
+ 
+  <div class="container">
+    <h1 class="my-4 text-center">
+      Weather for <span id="cityName"></span>
+    </h1>
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+      
+      <div class="col">
+        <div class="card mb-4 shadow-sm  border-primary">
+          <div class="card-header text-bg-primary">
+            <h4>Temperatures</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li>Temperature: <span id="temp"></span></li>
+              <li>Min Temperature: <span id="temp_min"></span></li>
+              <li>Max Temperature: <span id="temp_max"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col">
+        <div class="card mb-4 shadow-sm  border-primary">
+          <div class="card-header text-bg-primary">
+            <h4>Humidity Info</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li>Pressure: <span id="pressure"></span></li>
+              <li>Feels Like: <span id="feels_like"></span></li>
+              <li>Humidity: <span id="humidity"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="col">
+        <div class="card mb-4 shadow-sm border-primary">
+          <div class="card-header text-bg-primary">
+            <h4>Wind Info</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li>Wind Speed: <span id="wind_speed"></span></li>
+              <li>Sunrise: <span id="sunrise"></span></li>
+              <li>Sunset: <span id="sunset"></span></li>
+               
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+   
+    <h2 class="display-6 text-center mb-4">Weather of other common places</h2>
+
+    <div class="table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Cloud_pct</th>
+            <th>Feels_like</th>
+            <th>Grnd_level</th>
+            <th>Humidity</th>
+            <th>Sea_level</th>
+            <th>Temp</th>
+            <th>Temp_max</th>
+            <th>Temp_min</th>
+            <th>Sunrise</th>
+            <th>Sunset</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th class="text-start">Vishakapatnam</th>
+            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+          </tr>
+          <tr>
+            <th class="text-start">Kerala</th>
+            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th class="text-start">Lucknow</th>
+            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+          </tr>
+          <tr>
+            <th class="text-start">Kolkata</th>
+            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <script type="module" src="script.js" ></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+
 </body>
 </html>

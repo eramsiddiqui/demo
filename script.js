@@ -1,88 +1,53 @@
-import apiKey from "./api.js"
+const apiKey = 'c0aed0fd63941934138d16a0a846f869';
 
-const chatBox = document.getElementById('chat-box');
-const userInput = document.getElementById('user-input');
-const sendBtn = document.getElementById('send-btn');
+const submit = document.getElementById("submit");
+const city = document.getElementById("city");
+const cityTitle = document.getElementById("cityName");
+const form = document.getElementById("weatherForm");
 
-/*  isko tb us karna jb history chaiye hoga
-window.onload = () =>{
-  const savedChat = localStorage.getItem("chatHistory");
-  console.log({savedChat});
-  if(savedChat) chatBox.innerHTML = savedChat;
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-  */
+const getWeather = (cityName) => {
 
-function addMessage(message , className){
-  const msgDiv = document.createElement("div");
-  msgDiv.classList.add("message",className);
- //message added on screen div as text
-  msgDiv.textContent = message;
-  chatBox.appendChild(msgDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+  const temp = document.getElementById("temp");
+  const temp_min = document.getElementById("temp_min");
+  const temp_max = document.getElementById("temp_max");
+  const feels_like = document.getElementById("feels_like");
+  const pressure = document.getElementById("pressure");
 
-function showTyping(){
-  const typingDiv = document.createElement("div");
-  typingDiv.classList.add("message","bot-message");
-  typingDiv.textContent = "Bot is typing...";
-  chatBox.appendChild(typingDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
-  return typingDiv;
-}
+  const humidity = document.getElementById("humidity");
+  const wind_speed = document.getElementById("wind_speed");
+  const sunrise = document.getElementById("sunrise");
+  const sunset = document.getElementById("sunset");
+  const cloud_pct = document.getElementById("cloud_pct");
 
-async function getBotReply(userMessage){
- const url =
-  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  cityTitle.innerHTML = cityName;
 
- try{
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {"content-type": "application/json"},
-    body: JSON.stringify({
-      contents: [{parts: [{text: userMessage}]}]
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+
+      temp.innerHTML = data.main.temp + " °C";
+      temp_min.innerHTML = data.main.temp_min + " °C";
+      temp_max.innerHTML = data.main.temp_max + " °C";
+      feels_like.innerHTML = data.main.feels_like + " °C";
+      pressure.innerHTML = data.main.pressure + " hPa";
+
+      humidity.innerHTML = data.main.humidity + " %";
+      wind_speed.innerHTML = data.wind.speed + " m/s";
+
+    
+      if (cloud_pct) {
+        cloud_pct.innerHTML = data.clouds.all + " %";
+      }
+
+      sunrise.innerHTML = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+      sunset.innerHTML = new Date(data.sys.sunset * 1000).toLocaleTimeString();
     })
-  })
-// storing responce in data
-  const data = await response.json();
-  
-  // error aagya to upr aayega
-  if(!response.ok){
-    console.error("API Error:", data);
-    return data?.error?.message || "Error fetching response."
-  }
-  
-  return(
-    data.candidates?.[0]?.content?.parts?.[0]?.text || "Repeat that shit again dog."
-  )
- } catch(error){
-   
- }
- 
+    .catch(err => console.error(err));
+};
 
-}
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  getWeather(city.value);
+});
 
-
- sendBtn.onclick = async() =>{
-  //jo user daalega vo messege mai jayega trim thoda extra space kai liye
-  const message = userInput.value.trim();
-  if(message === "") return;
-  //addMessage function hai aur user message class sai aa rha hai
-  addMessage(message,"user-message");
-  userInput.value = "";
-// it will show that ai is typing like ...
-   const typingDiv = showTyping();
-
-   const botReply = await getBotReply(message);
-   typingDiv.remove();
-   addMessage(botReply,"bot-message");
-
-   // local storage mai save kr rhe taki refresh pai sara ud na jaye
-   localStorage.setItem("chatHistory",chatBox.innerHTML);
-
- }
-
- // yai use kiye taki jb enter button press kre tb vo send ho jaye
-   userInput.addEventListener("keypress",(e) => {
-    if(e.key === "Enter")sendBtn.click();
-   })
+getWeather("Delhi");
