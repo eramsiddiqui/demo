@@ -1,156 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Weather App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Weather App</a>
+<div id="calculator">
+    <input id="display" readonly />
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">About this App</a></li>
-        </ul>
-
-        
-        <form class="d-flex" id="weatherForm">
-          <input id="city" class="form-control me-2" type="search" placeholder="Search city" />
-          
-          <button id="submit" type="submit" class="btn btn-outline-success">
-            Search
-          </button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
- 
-  <div class="container">
-    <h1 class="my-4 text-center">
-      Weather for <span id="cityName"></span>
-    </h1>
-
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-
-      
-      <div class="col">
-        <div class="card mb-4 shadow-sm  border-primary">
-          <div class="card-header text-bg-primary">
-            <h4>Temperatures</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li>Temperature: <span id="temp"></span></li>
-              <li>Min Temperature: <span id="temp_min"></span></li>
-              <li>Max Temperature: <span id="temp_max"></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      
-      <div class="col">
-        <div class="card mb-4 shadow-sm  border-primary">
-          <div class="card-header text-bg-primary">
-            <h4>Humidity Info</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li>Pressure: <span id="pressure"></span></li>
-              <li>Feels Like: <span id="feels_like"></span></li>
-              <li>Humidity: <span id="humidity"></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-     
-      <div class="col">
-        <div class="card mb-4 shadow-sm border-primary">
-          <div class="card-header text-bg-primary">
-            <h4>Wind Info</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li>Wind Speed: <span id="wind_speed"></span></li>
-              <li>Sunrise: <span id="sunrise"></span></li>
-              <li>Sunset: <span id="sunset"></span></li>
-               
-            </ul>
-          </div>
-        </div>
-      </div>
-
+    <div id="keys">
+        <button onclick="appendToDisplay('+')"class="operator-btn">+</button>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('-')"class="operator-btn">-</button>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('*')"class="operator-btn">*</button>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('/')"class="operator-btn">/</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="clearDisplay()" class="operator-btn">C</button>
     </div>
 
-   
-    <h2 class="display-6 text-center mb-4">Weather of other common places</h2>
+</div>
 
-    <div class="table-responsive">
-      <table class="table text-center">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Cloud_pct</th>
-            <th>Feels_like</th>
-            <th>Grnd_level</th>
-            <th>Humidity</th>
-            <th>Sea_level</th>
-            <th>Temp</th>
-            <th>Temp_max</th>
-            <th>Temp_min</th>
-            <th>Sunrise</th>
-            <th>Sunset</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <th class="text-start">Vishakapatnam</th>
-            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
-            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
-          </tr>
-          <tr>
-            <th class="text-start">Kerala</th>
-            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
-            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th class="text-start">Lucknow</th>
-            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
-            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
-          </tr>
-          <tr>
-            <th class="text-start">Kolkata</th>
-            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
-            <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+<script src="index.js"></script>
 
 </body>
 </html>
